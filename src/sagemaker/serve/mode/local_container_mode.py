@@ -229,7 +229,7 @@ class LocalContainerMode(
         except subprocess.CalledProcessError as e:
             logger.warning("Unable to login to ecr: %s", e)
 
-        self.client = docker.from_env(version='1.49')
+        self.client = docker.from_env(version='1.44')
         try:
             logger.info("Pulling image %s from repository...", image)
             self.client.images.pull(image)

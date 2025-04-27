@@ -195,7 +195,7 @@ def _build_container(sagemaker_session, py_version, docker_template):
             print(f"Dockerfile contents: \n{content}\n")
             file.writelines(content)
 
-        docker_client = docker.from_env(version='1.49')
+        docker_client = docker.from_env(version='1.44')
 
         print("building docker image...")
         # platform is provided to make sure that the image builds correctly across different OS platforms
@@ -248,7 +248,7 @@ def _build_auto_capture_client_container(py_version, docker_template):
             print(f"Dockerfile contents: \n{content}\n")
             file.writelines(content)
 
-        docker_client = docker.from_env(version='1.49')
+        docker_client = docker.from_env(version='1.44')
 
         print("building docker image...")
         image, build_logs = docker_client.images.build(path=tmpdir, tag=REPO_NAME, rm=True)
