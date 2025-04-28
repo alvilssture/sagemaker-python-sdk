@@ -61,7 +61,7 @@ class TensorflowservingServerTests(TestCase):
             "serve",
             detach=True,
             auto_remove=True,
-            network_mode="host",
+            network_mode="sagemaker",
             volumes={PosixPath("model_path"): {"bind": "/opt/ml/model", "mode": "rw"}},
             environment={
                 "SAGEMAKER_SUBMIT_DIRECTORY": "/opt/ml/model/code",

@@ -60,7 +60,7 @@ class MultiModelServerPrepareTests(TestCase):
         mock_docker_client.containers.run.assert_called_once_with(
             CPU_TF_IMAGE,
             "serve",
-            network_mode="host",
+            network_mode="sagemaker",
             detach=True,
             auto_remove=True,
             volumes={PosixPath("model_path/code"): {"bind": "/opt/ml/model/", "mode": "rw"}},

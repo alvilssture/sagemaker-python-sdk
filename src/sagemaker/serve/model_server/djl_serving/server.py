@@ -41,7 +41,7 @@ class LocalDJLServing:
             ["djl-serving", "-s", MODE_DIR_BINDING],
             shm_size=_SHM_SIZE,
             device_requests=[DeviceRequest(count=-1, capabilities=[["gpu"]])],
-            network_mode="host",
+            network_mode="sagemaker",
             detach=True,
             auto_remove=True,
             volumes={

@@ -60,7 +60,7 @@ class TeiServerTests(TestCase):
             TEI_IMAGE,
             shm_size="2G",
             device_requests=[DeviceRequest(count=-1, capabilities=[["gpu"]])],
-            network_mode="host",
+            network_mode="sagemaker",
             detach=True,
             auto_remove=True,
             volumes={PosixPath("model_path/code"): {"bind": "/opt/ml/model/", "mode": "rw"}},

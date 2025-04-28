@@ -30,7 +30,7 @@ class LocalTorchServe:
             "serve",
             detach=True,
             auto_remove=True,
-            network_mode="host",
+            network_mode="sagemaker",
             volumes={
                 Path(model_path): {
                     "bind": "/opt/ml/model",

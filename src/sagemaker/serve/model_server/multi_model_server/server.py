@@ -47,7 +47,7 @@ class LocalMultiModelServer:
         self.container = client.containers.run(
             image,
             "serve",
-            network_mode="host",
+            network_mode="sagemaker",
             detach=True,
             auto_remove=True,
             volumes={

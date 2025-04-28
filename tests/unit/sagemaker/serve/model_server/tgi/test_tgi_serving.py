@@ -72,7 +72,7 @@ class TestLocalTgiServing(TestCase):
                     "Options": {},
                 }
             ],
-            network_mode="host",
+            network_mode="sagemaker",
             detach=True,
             auto_remove=True,
             volumes={
@@ -111,7 +111,7 @@ class TestLocalTgiServing(TestCase):
                     "Options": {},
                 }
             ],
-            network_mode="host",
+            network_mode="sagemaker",
             detach=True,
             auto_remove=True,
             volumes={
