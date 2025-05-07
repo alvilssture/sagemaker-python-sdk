@@ -157,7 +157,7 @@ class SchemaBuilder(TritonSchemaBuilder):
         if isinstance(obj, np.ndarray):
             return NumpySerializer()
         if isinstance(obj, DataFrame):
-            return CSVSerializerWrapper()
+            return JSONSerializerWrapper()
         if isinstance(obj, bytes) or _is_path_to_file(obj):
             return DataSerializer()
         if _is_torch_tensor(obj):
