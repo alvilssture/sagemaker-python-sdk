@@ -110,7 +110,7 @@ class CSVSerializer(SimpleBaseSerializer):
             return data.read()
 
         if isinstance(data, DataFrame):
-            return data.to_csv(header=False, index=False)
+            return data.to_csv(header=True, index=False)
 
         is_mutable_sequence_like = self._is_sequence_like(data) and hasattr(data, "__setitem__")
         has_multiple_rows = len(data) > 0 and self._is_sequence_like(data[0])
