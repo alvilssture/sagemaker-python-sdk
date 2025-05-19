@@ -1793,7 +1793,8 @@ api/latest/reference/services/sagemaker.html#SageMaker.Client.add_tags>`_
             if update_endpoint:
                 import uuid
                 random_uuid = uuid.uuid4()
-                curr_endpoint_config_name = self.sagemaker_client.describe_endpoint(EndpointName=self.name)['EndpointConfigName']
+                sagemaker_session = self.sagemaker_session or sagemaker.Session()
+                curr_endpoint_config_name = sagemaker_session.describe_endpoint(EndpointName=self.name)['EndpointConfigName']
                 curr_endpoint_config_name = curr_endpoint_config_name + str(random_uuid)
                 endpoint_config_name = self.sagemaker_session.create_endpoint_config(
                     name=curr_endpoint_config_name,
@@ -2318,6 +2319,7 @@ class ModelPackage(Model):
 
         # Quering the approval status for the model package
         # Approving the versioned model package in case it is not approved
+
         model_package_desc = self.sagemaker_session.sagemaker_client.describe_model_package(
             ModelPackageName=self.model_package_arn or model_package_name
         )
