@@ -1793,9 +1793,7 @@ api/latest/reference/services/sagemaker.html#SageMaker.Client.add_tags>`_
             if update_endpoint:
                 import uuid
                 random_uuid = uuid.uuid4()
-                sagemaker_session = self.sagemaker_session or sagemaker.Session()
-                curr_endpoint_config_name = sagemaker_session.sagemaker_client.describe_endpoint(EndpointName=self.name)['EndpointConfigName']
-                curr_endpoint_config_name = curr_endpoint_config_name + "-" + str(random_uuid)
+                curr_endpoint_config_name = self.name + "-" + str(random_uuid)
                 endpoint_config_name = self.sagemaker_session.create_endpoint_config(
                     name=curr_endpoint_config_name,
                     model_name=self.name,
