@@ -344,6 +344,8 @@ class Model(ModelBase, InferenceRecommenderMixin):
         self.image_uri = image_uri
         self.predictor_cls = predictor_cls
         self.name = name
+        if self.name:
+            self.name = utils.name_from_base(self.name)
         self._base_name = None
         self.sagemaker_session = sagemaker_session
         self.algorithm_arn = None
@@ -1791,7 +1793,6 @@ api/latest/reference/services/sagemaker.html#SageMaker.Client.add_tags>`_
                 explainer_config_dict = explainer_config._to_request_dict()
 
             if update_endpoint:
-                self.name = utils.name_from_base(self.name)
                 endpoint_config_name = self.sagemaker_session.create_endpoint_config(
                     name=self.name,
                     model_name=self.name,
