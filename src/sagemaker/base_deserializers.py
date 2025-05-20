@@ -197,7 +197,7 @@ class NumpyDeserializer(SimpleBaseDeserializer):
     single array.
     """
 
-    def __init__(self, dtype=None, accept="application/x-npy", allow_pickle=False):
+    def __init__(self, dtype=None, accept="application/x-npy", allow_pickle=True):
         """Initialize a ``NumpyDeserializer`` instance.
 
         Args:
