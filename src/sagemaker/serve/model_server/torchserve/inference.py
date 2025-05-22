@@ -160,6 +160,9 @@ def _get_mlflow_flavor():
 
 def _load_mlflow_model(deployment_flavor, model_dir):
     # TODO: move this to constants section
+
+    logger.info(f"Using {model_dir} to load mlflow model.")
+
     flavor_loader_map = {
         "keras": ("mlflow.keras", "load_model"),
         "python_function": ("mlflow.pyfunc", "load_model"),
