@@ -20,12 +20,14 @@ logger = logging.getLogger(__name__)
 inference_spec = None
 native_model = None
 schema_builder = None
+_loaded = None
 
 
 def model_fn(model_dir):
     """Placeholder docstring"""
     shared_libs_path = Path(model_dir + "/shared_libs")
-
+    if _loaded is not None:
+        return _loaded
     if shared_libs_path.exists():
         # before importing, place dynamic linked libraries in shared lib path
         shutil.copytree(shared_libs_path, "/lib", dirs_exist_ok=True)
@@ -33,13 +35,14 @@ def model_fn(model_dir):
     serve_path = Path(__file__).parent.joinpath("serve.pkl")
     mlflow_flavor = _get_mlflow_flavor()
     with open(str(serve_path), mode="rb") as file:
-        global inference_spec, native_model, schema_builder
+        global _loaded, inference_spec, native_model, schema_builder
         obj = cloudpickle.load(file)
         if mlflow_flavor is not None:
             # TODO: Add warning if it's pyfunc flavor since it will need to enforce schema
             schema_builder = obj
             loaded_model = _load_mlflow_model(deployment_flavor=mlflow_flavor, model_dir=model_dir)
-            return loaded_model if callable(loaded_model) else loaded_model.predict
+            _loaded =  loaded_model if callable(loaded_model) else loaded_model.predict
+            return _loaded
         elif isinstance(obj[0], InferenceSpec):
             inference_spec, schema_builder = obj
         elif isinstance(obj[0], str) and obj[0] == "xgboost":
