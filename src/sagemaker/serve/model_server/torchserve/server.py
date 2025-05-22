@@ -53,7 +53,7 @@ class LocalTorchServe:
                 f"http://{get_docker_host()}:8080/invocations",
                 data=request,
                 headers={"Content-Type": content_type, "Accept": accept},
-                timeout=60,  # this is what SageMaker Hosting uses as timeout
+                timeout=600,  # this is what SageMaker Hosting uses as timeout
             )
             response.raise_for_status()
             return response.content
