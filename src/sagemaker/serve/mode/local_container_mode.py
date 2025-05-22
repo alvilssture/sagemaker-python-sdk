@@ -33,7 +33,10 @@ _PING_HEALTH_CHECK_FAIL_MSG = (
     "Container did not pass the ping health check. "
     + "Please increase container_timeout_seconds or review your inference code."
 )
+import os
+os.environ['COMPOSE_HTTP_TIMEOUT'] = 600
 
+os.environ['DOCKER_CLIENT_TIMEOUT'] = 600
 
 class LocalContainerMode(
     LocalTorchServe,
