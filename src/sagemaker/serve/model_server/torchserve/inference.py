@@ -25,9 +25,12 @@ _loaded = None
 
 def model_fn(model_dir):
     """Placeholder docstring"""
+    global _loaded, inference_spec, native_model, schema_builder
+
     shared_libs_path = Path(model_dir + "/shared_libs")
-    if _loaded is not None:
+    if _loaded:
         return _loaded
+    
     if shared_libs_path.exists():
         # before importing, place dynamic linked libraries in shared lib path
         shutil.copytree(shared_libs_path, "/lib", dirs_exist_ok=True)
@@ -35,7 +38,6 @@ def model_fn(model_dir):
     serve_path = Path(__file__).parent.joinpath("serve.pkl")
     mlflow_flavor = _get_mlflow_flavor()
     with open(str(serve_path), mode="rb") as file:
-        global _loaded, inference_spec, native_model, schema_builder
         obj = cloudpickle.load(file)
         if mlflow_flavor is not None:
             # TODO: Add warning if it's pyfunc flavor since it will need to enforce schema
