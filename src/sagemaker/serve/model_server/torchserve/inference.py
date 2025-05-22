@@ -28,7 +28,9 @@ def model_fn(model_dir):
     global _loaded, inference_spec, native_model, schema_builder
 
     shared_libs_path = Path(model_dir + "/shared_libs")
+    logger.info(f"loading mlflow model..... {_loaded}")
     if _loaded:
+        logger.info(f" mlflow model already loaded... {_loaded}")
         return _loaded
     
     if shared_libs_path.exists():
@@ -43,6 +45,7 @@ def model_fn(model_dir):
             # TODO: Add warning if it's pyfunc flavor since it will need to enforce schema
             schema_builder = obj
             loaded_model = _load_mlflow_model(deployment_flavor=mlflow_flavor, model_dir=model_dir)
+            logger.info(f" mlflow has been loaded... {_loaded}")
             _loaded =  loaded_model if callable(loaded_model) else loaded_model.predict
             return _loaded
         elif isinstance(obj[0], InferenceSpec):
