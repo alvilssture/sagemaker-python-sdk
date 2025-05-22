@@ -24,6 +24,11 @@ class LocalTorchServe:
     def _start_torch_serve(
         self, client: object, image: str, model_path: str, secret_key: str, env_vars: dict
     ):
+        print("++++++++++++++++++++++")
+        print(image)
+        print(model_path)
+        print(secret_key)
+        print(env_vars)
         """Placeholder docstring"""
         self.container = client.containers.run(
             image,
