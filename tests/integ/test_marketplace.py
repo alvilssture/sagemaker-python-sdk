@@ -205,7 +205,7 @@ def iris_image(sagemaker_session):
     ecr_client = sagemaker_session.boto_session.client("ecr")
     username, password = _ecr_login(ecr_client)
 
-    docker_client = docker.from_env(version='1.44')
+    docker_client = docker.from_env(version='1.44', timeout=600)
 
     # Build and tag docker image locally
     path = os.path.join(DATA_DIR, "marketplace", "iris")

@@ -35,7 +35,6 @@ _PING_HEALTH_CHECK_FAIL_MSG = (
 )
 import os
 os.environ['COMPOSE_HTTP_TIMEOUT'] = '600'
-
 os.environ['DOCKER_CLIENT_TIMEOUT'] = '600'
 
 class LocalContainerMode(
@@ -232,7 +231,7 @@ class LocalContainerMode(
         except subprocess.CalledProcessError as e:
             logger.warning("Unable to login to ecr: %s", e)
 
-        self.client = docker.from_env(version='1.44')
+        self.client = docker.from_env(version='1.44', timeout=600)
         try:
             logger.info("Pulling image %s from repository...", image)
             self.client.images.pull(image)

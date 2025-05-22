@@ -40,7 +40,7 @@
 
 
 # def terminate_all_container():
-#     client = docker.from_env(version='1.44')
+#     client = docker.from_env(version='1.44', timeout=600)
 #     # List all container IDs (including stopped containers)
 #     container_ids = [container.id for container in client.containers.list(all=True)]
 
