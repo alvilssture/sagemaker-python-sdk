@@ -344,8 +344,6 @@ class Model(ModelBase, InferenceRecommenderMixin):
         self.image_uri = image_uri
         self.predictor_cls = predictor_cls
         self.name = name
-        if self.name:
-            self.name = utils.name_from_base(self.name)
         self._base_name = None
         self.sagemaker_session = sagemaker_session
         self.algorithm_arn = None
